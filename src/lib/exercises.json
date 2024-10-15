@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Neck stretch",
+    "description": "Relax your shoulders, tilt your head to one side, and hold for 30 seconds.",
+    "duration": 30000
+  },
+  {
+    "title": "Neck stretch",
+    "description": "Tilt your head the other way and hold for 30 seconds.",
+    "duration": 30000
+  },
+  {
+    "title": "Shoulder stretch",
+    "description": "Straighten your back, extend one arm across your body, use your other arm to pull it closer to your body, and hold for 30 seconds.",
+    "duration": 30000
+  },
+  {
+    "title": "Shoulder stretch",
+    "description": "Switch sides and hold for 30 seconds.",
+    "duration": 30000
+  },
+  {
+    "title": "Cat-cow stretch",
+    "description": "Get on your hands and knees, round your back, tuck your chin into your chest, and hold for 30 seconds.",
+    "duration": 30000
+  },
+  {
+    "title": "Cat-cow stretch",
+    "description": "Arch your back, lift your head slightly, and hold for 30 seconds.",
+    "duration": 30000
+  },
+  {
+    "title": "Hip flexor stretch",
+    "description": "Put your right knee on the floor, put your left foot flat in front, push your hips forward, keep your back straight, and hold for 30 seconds.",
+    "duration": 30000
+  },
+  {
+    "title": "Hip flexor stretch",
+    "description": "Switch sides and hold for 30 seconds.",
+    "duration": 30000
+  },
+  {
+    "title": "Seated hamstring stretch",
+    "description": "Sit on the floor with your legs extended in front of you, reach toward your toes, keep your back straight & chest open, and hold for 30 seconds.",
+    "duration": 30000
+  },
+  {
+    "title": "Child's pose",
+    "description": "Get on your hands and knees, sit back on your heels, extending your arms forward on the floor, lower your chest toward the floor while keeping your arms extended, and hold for 30 seconds.",
+    "duration": 30000
+  }
+]

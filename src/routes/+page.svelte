@@ -1,18 +1,33 @@
 <script>
-  import Button from "$lib/Button.svelte";
+  import { browser } from "$app/environment";
   import { formatTime, timeExercises } from "$lib";
+  import Button from "$lib/Button.svelte";
   import exercises from "$lib/exercises.json";
+  import chime from '$lib/chime.mp3';
 
+  // Add start and end times (in ms) to the exercise array
   const timedExercises = timeExercises(exercises);
 
+  // Calculate the total duration of the routine
   const totalDuration = exercises.reduce((sum, prev) => sum + prev.duration, 0);
 
   /** @type {number} */
   let interval;
+  
+  /** @type {number} */
   let time = 0;
+
+  /** @type {App.TimerStatus} */
   let status = "notStarted";
 
-  function start() {
+  /** @type {WakeLockSentinel}*/
+  let wakeLock;
+
+  /** @type {App.TimedExercise | undefined} */
+  let previousExercise;
+
+  // Start the timer, set the status to running, and keep the screen from turning off
+  async function start() {
     interval = setInterval(() => {
       time += 100;
       if (time >= totalDuration) {
@@ -22,20 +37,45 @@
     }, 100);
 
     status = "running";
+    wakeLock = await navigator.wakeLock.request("screen");
   }
 
+  // Stop the timer, set the status to paused, and allow the screen to turn off when idle
   function pause() {
     clearInterval(interval);
     status = "paused";
+    if (wakeLock !== null) wakeLock.release();
   }
 
+  // Stop the timer, set the status to not started, allow the screen to turn off, and reset the time
+  // to zero
   function cancel() {
     clearInterval(interval);
-    time = 0;
     status = "notStarted";
+    if (wakeLock !== null) wakeLock.release();
+    time = 0;
   }
 
+  // Set the current exercise based on the time and the exercise start/end times
   $: currentExercise = timedExercises.find((e) => time >= e.start && time < e.end);
+
+  // Exercise change notification
+  $: if (currentExercise !== previousExercise) {
+    // Only on browser and when its not the first exercise
+    if (browser && time !== 0 && currentExercise) {
+      // If text-to-speech is available, speak the exercise title
+      if (typeof window.SpeechSynthesisUtterance !== "undefined") {
+        const utterance = new SpeechSynthesisUtterance(currentExercise.title);
+        window.speechSynthesis.speak(utterance);
+      } else {
+        // Otherwise, play a chime
+        const chimeAudio = new Audio(chime);
+        chimeAudio.play();
+      }
+    }
+    
+    previousExercise = currentExercise;
+  }
 </script>
 
 <div class="min-h-screen bg-slate-900 text-slate-50 flex flex-col justify-center p-5">

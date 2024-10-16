@@ -6,6 +6,8 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 
+		type TimerStatus = 'notStarted' | 'running' | 'paused' | 'finished';
+
 		interface Exercise {
 			title: string;
 			description: string;

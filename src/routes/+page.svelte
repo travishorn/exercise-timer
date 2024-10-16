@@ -65,6 +65,7 @@
     if (browser && time !== 0 && currentExercise) {
       // If text-to-speech is available, speak the exercise title
       if (typeof window.SpeechSynthesisUtterance !== "undefined") {
+        window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(currentExercise.title);
         window.speechSynthesis.speak(utterance);
       } else {
